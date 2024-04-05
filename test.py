@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import streamlit as st
 import altair as alt
-import plotly.express as px
+from plotly import express as px
 location = 'IQVIA_Thailand total market_2024.02.01.xlsx'
 df = pd.read_excel(location)
 df.drop(34191,inplace=True)
