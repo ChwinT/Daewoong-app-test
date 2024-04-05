@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import streamlit as st
 import altair as alt
-from plotly import express as px
+#from plotly import express as px
 location = 'IQVIA_Thailand total market_2024.02.01.xlsx'
 df = pd.read_excel(location)
 df.drop(34191,inplace=True)
@@ -42,7 +42,7 @@ with col[0]:
     df_drug_total_long = df_drug_total.T
     st.markdown('General Total Market situation')
     st.metric(label='Latest market value (2022,USD)',value='{:0,.0f}'.format(df_drug['usd2022'].sum()),delta='{:.3f}%'.format((quickcagr(df_drug,selected_drug)-1)*100))
-    st.plotly_chart(px.line(df_drug_total_long,x=df_drug_total_long.index,y=selected_drug,markers=True,height=300,width=450))
+    #st.plotly_chart(px.line(df_drug_total_long,x=df_drug_total_long.index,y=selected_drug,markers=True,height=300,width=450))
     selected_filter = st.selectbox('Filtering:',['Top 5 highest CAGR','Top 5 Values in USD in 2022'])
     if selected_filter == 'Top 5 highest CAGR':
         df_drug_group.sort_values('cagr',ascending=False,inplace=True)
@@ -70,14 +70,14 @@ with col[0]:
     df_drug_sector_total = df_drug_sector[['drug','usd2020','usd2021','usd2022']].groupby('drug').sum()
     df_drug_sector_total_long = df_drug_sector_total.T
     st.metric(label='Latest market value (2022,USD)',value='{:0,.0f}'.format(df_drug_sector['usd2022'].sum()),delta='{:.3f}%'.format((quickcagr(df_drug_sector,selected_drug)-1)*100))
-    st.plotly_chart(px.line(df_drug_sector_total_long,x=df_drug_sector_total_long.index,y=selected_drug,markers=True,height=300,width=450))
+    #st.plotly_chart(px.line(df_drug_sector_total_long,x=df_drug_sector_total_long.index,y=selected_drug,markers=True,height=300,width=450))
 with col[1]:
     st.markdown('In-depth market details')
     df_drug_brand = df_drug_sector[['brand','usd2020','usd2021','usd2022']].groupby('brand').sum().reset_index()
     selected_year = st.selectbox('Select interested year',['2022','2021','2020'])
-    fig = px.pie(df_drug_brand,values='usd'+selected_year,names='brand',hole=0.3)
-    fig.update_traces(textposition='inside')
-    st.plotly_chart(fig)
+    #fig = px.pie(df_drug_brand,values='usd'+selected_year,names='brand',hole=0.3)
+    #fig.update_traces(textposition='inside')
+    #st.plotly_chart(fig)
     st.dataframe(df_drug_brand.describe(),column_order=('usd2020','usd2021','usd2022'),
                  column_config={
                      'usd2020':st.column_config.TextColumn('USD in 2020'),
