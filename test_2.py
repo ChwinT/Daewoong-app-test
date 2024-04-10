@@ -1,5 +1,5 @@
-$ pip install pandas
-$ pip install plotly
+% pip install pandas
+% pip install plotly
 import streamlit as st
 import pandas as pd
 from plotly import express as px
